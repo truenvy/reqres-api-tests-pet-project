@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.truenvy.reqres.configs.ConfigProvider;
 import org.truenvy.reqres.configs.ReqresUrlConfig;
 import org.truenvy.reqres.rest.configuration.RestApiClientSpec;
+import org.truenvy.reqres.rest.models.requests.users.UserRequest;
 
 /**
  * ReqresApiClient provides methods to interact with the Reqres API.
@@ -33,30 +34,33 @@ public class ReqresApiClient extends RestApiClientSpec {
     @Step("Get list of users")
     public Response getUsers(String pageParam) {
         log.info("Get list of users");
-        return this.requestSpec.pathParam("page", pageParam).get(reqresUrlConfig.users());
+        return getRequestSpec().pathParam("page", pageParam).get(reqresUrlConfig.users());
     }
 
     @Step("POST :: Create user: {body}")
-    public Response createUser(String body) {
+    public Response createUser(UserRequest body) {
         log.info("POST :: Create user: {}", body);
-        return this.requestSpec.body(body).post(reqresUrlConfig.users());
+        if (body == null) {
+            return getRequestSpec().post(reqresUrlConfig.users());
+        }
+        return getRequestSpec().body(body).post(reqresUrlConfig.users());
     }
 
     @Step("PUT :: Update user: {body}")
     public Response putUpdateUser(String body) {
         log.info("PUT :: Update user: {}", body);
-        return this.requestSpec.body(body).put(reqresUrlConfig.users());
+        return getRequestSpec().body(body).put(reqresUrlConfig.users());
     }
 
     @Step("PATCH :: Update user: {body}")
     public Response patchUpdateUser(String body) {
         log.info("PATCH :: Update user: {}", body);
-        return this.requestSpec.body(body).patch(reqresUrlConfig.users());
+        return getRequestSpec().body(body).patch(reqresUrlConfig.users());
     }
 
     @Step("Delete user by ID: {id}")
     public Response deleteUserById(String id) {
         log.info("Delete user by ID: {}", id);
-        return this.requestSpec.delete("%s/%s".formatted(reqresUrlConfig.users(), id));
+        return getRequestSpec().delete("%s/%s".formatted(reqresUrlConfig.users(), id));
     }
 }

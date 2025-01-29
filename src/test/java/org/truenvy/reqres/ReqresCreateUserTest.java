@@ -16,12 +16,12 @@ import org.truenvy.reqres.data.factory.ReqresTestDataFactory;
 @Stories({
         @Story("Create user")
 })
-public class ReqresUpdateUserTest extends AbstractBaseTest {
+public class ReqresCreateUserTest extends AbstractBaseTest {
     private static final int CREATED = 201;
 
     @Test
     @DisplayName("Reqres :: create user :: positive test")
-    void updateUser_positiveTest() {
+    void createUser_positiveTest() {
         // given
         var userData = ReqresTestDataFactory.generateUserData();
 

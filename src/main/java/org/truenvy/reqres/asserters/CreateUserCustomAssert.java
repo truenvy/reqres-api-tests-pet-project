@@ -1,12 +1,20 @@
 package org.truenvy.reqres.asserters;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.AbstractAssert;
 import org.truenvy.reqres.rest.models.requests.users.UserRequest;
 import org.truenvy.reqres.rest.models.responses.users.UserUpdateResponse;
 
 import java.util.Objects;
 
+/**
+ * A custom assertion class for validating the response of the Create User API call.
+ * This class extends {@link AbstractAssert}, providing a custom implementation for
+ * asserting specific response details.
+ */
+@Slf4j
 public class CreateUserCustomAssert extends AbstractAssert<CreateUserCustomAssert, Response> {
 
     protected CreateUserCustomAssert(Response userUpdateResponse) {
@@ -17,7 +25,9 @@ public class CreateUserCustomAssert extends AbstractAssert<CreateUserCustomAsser
         return new CreateUserCustomAssert(userUpdateResponse);
     }
 
+    @Step("Assert that API response should have status code: {statusCode}")
     public CreateUserCustomAssert hasStatusCode(int statusCode) {
+        log.info("Assert that API response should have status code: {}", statusCode);
         isNotNull();
         if (actual.getStatusCode() != statusCode) {
             failWithMessage("Expected status code <%s> but was <%s>", statusCode, actual.getStatusCode());
@@ -25,7 +35,9 @@ public class CreateUserCustomAssert extends AbstractAssert<CreateUserCustomAsser
         return this;
     }
 
+    @Step("Assert that API response should have user data: {userRequest}")
     public CreateUserCustomAssert hasUserData(UserRequest userRequest) {
+        log.info("Assert that API response should have user data: {}", userRequest);
         isNotNull();
         var userResponse = actual.as(UserUpdateResponse.class);
         if (
@@ -38,7 +50,9 @@ public class CreateUserCustomAssert extends AbstractAssert<CreateUserCustomAsser
         return this;
     }
 
+    @Step("Assert that API response should have id not null")
     public CreateUserCustomAssert hasIdNotNull() {
+        log.info("Assert that API response should have id not null");
         isNotNull();
         var userResponse = actual.as(UserUpdateResponse.class);
         if (Objects.isNull(userResponse.id())) {
@@ -47,7 +61,9 @@ public class CreateUserCustomAssert extends AbstractAssert<CreateUserCustomAsser
         return this;
     }
 
+    @Step("Assert that API response should have createdAt not null")
     public CreateUserCustomAssert hasCreatedAtNotNull() {
+        log.info("Assert that API response should have createdAt not null");
         isNotNull();
         var userResponse = actual.as(UserUpdateResponse.class);
         if (Objects.isNull(userResponse.createdAt())) {

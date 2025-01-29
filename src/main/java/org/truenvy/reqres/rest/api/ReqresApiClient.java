@@ -47,13 +47,13 @@ public class ReqresApiClient extends RestApiClientSpec {
     }
 
     @Step("PUT :: Update user: {body}")
-    public Response putUpdateUser(String body) {
+    public Response putUpdateUser(UserRequest body) {
         log.info("PUT :: Update user: {}", body);
         return getRequestSpec().body(body).put(reqresUrlConfig.users());
     }
 
     @Step("PATCH :: Update user: {body}")
-    public Response patchUpdateUser(String body) {
+    public Response patchUpdateUser(UserRequest body) {
         log.info("PATCH :: Update user: {}", body);
         return getRequestSpec().body(body).patch(reqresUrlConfig.users());
     }

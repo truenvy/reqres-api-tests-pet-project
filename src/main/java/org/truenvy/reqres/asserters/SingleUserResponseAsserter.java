@@ -7,6 +7,13 @@ import org.truenvy.reqres.rest.models.responses.users.get.GetSingleUserResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * A utility class to assert properties of the response returned from
+ * a "Get Single User" API call. It validates the structure and content
+ * of the response, ensuring compliance with expected API behavior.
+ * The assertions are presented in a fluent interface style for
+ * better readability and chaining support.
+ */
 @Slf4j
 public class SingleUserResponseAsserter {
     private final Response response;
@@ -21,7 +28,7 @@ public class SingleUserResponseAsserter {
         }
     }
 
-    @Step("API request should have status code: {statusCode}")
+    @Step("API response should have status code: {statusCode}")
     public SingleUserResponseAsserter toHaveStatusCode(int statusCode) {
         log.info("API request should have status code: {}", statusCode);
         response.then().statusCode(statusCode);
@@ -42,7 +49,7 @@ public class SingleUserResponseAsserter {
         return this;
     }
 
-    @Step("API request should have first name not null")
+    @Step("API response should have first name not null")
     public SingleUserResponseAsserter toHaveFirstNameNotNull() {
         log.info("API request should have first name not null");
         assertThat(this.getSingleUserResponse.data().firstName()).isNotNull();

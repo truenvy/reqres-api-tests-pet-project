@@ -6,7 +6,7 @@
 
     <groupId>org.truenvy</groupId>
     <artifactId>reqres-api-tests-pet-project</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

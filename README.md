@@ -47,22 +47,6 @@ can use the Factory pattern to easily generate the example objects.
 Builder is a creational design pattern, which allows the construction of complex objects step by step. It can be used to
 organize any group of classes, but I commonly use it in Model and Query Parameter objects.
 
-### Approaches
-
-#### Auto-generate clients from OpenAPI specification
-
-To avoid the re-implementation of the API calls to the microservices I will use the Open API specification file from
-the services to auto-generate the base client.
-
-#### Hiding auto-generated clients using custom asserters
-
-I could use the client class in the test. In this case, I would add the correct return instead of the generic Response
-from Rest-Assured. This is doable but will add more code maintenance, so I decided to add a new (last one) abstraction
-layer.
-
-The asserters abstraction will contain a set of methods interacting with the client methods, asserting it instantly and
-returning itself for chaining the methods.
-
 #### Separation of constant and dynamic data
 
 I am defining here a separation of the data used: changeless and dynamic.

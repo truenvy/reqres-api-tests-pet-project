@@ -89,11 +89,11 @@ allure serve target/allure-results
 Build a docker image based on the Dockerfile in the root directory
 
 ```
-docker build -t dogs-api-tests .
+docker build -t reqres-api-tests .
 ```
 
 Run the docker container based on the built image
 
 ```
-docker run -it --rm -p 8080:8080 dogs-api-tests
+docker run -it --rm -p 8080:8080 reqres-api-tests
 ```

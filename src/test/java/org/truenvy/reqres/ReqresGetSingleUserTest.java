@@ -6,8 +6,9 @@ import io.qameta.allure.Stories;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.truenvy.reqres.asserters.SingleUserResponseAsserter;
 import org.truenvy.reqres.base.AbstractBaseTest;
+
+import static org.truenvy.reqres.asserters.SingleUserResponseAsserter.assertThat;
 
 @Epics({
         @Epic("Reqres")
@@ -29,7 +30,7 @@ public class ReqresGetSingleUserTest extends AbstractBaseTest {
         var singleUserResponse = reqresApiClient.getUserById(userId);
 
         // then
-        new SingleUserResponseAsserter(singleUserResponse)
+        assertThat(singleUserResponse)
                 .toHaveStatusCode(OK)
                 .toHaveIdNotNull(userId)
                 .toHaveEmailNotNull()
@@ -47,7 +48,7 @@ public class ReqresGetSingleUserTest extends AbstractBaseTest {
         var singleUserResponse = reqresApiClient.getUserById(userId);
 
         // then
-        new SingleUserResponseAsserter(singleUserResponse)
+        assertThat(singleUserResponse)
                 .toHaveStatusCode(NOT_FOUND);
     }
 }
